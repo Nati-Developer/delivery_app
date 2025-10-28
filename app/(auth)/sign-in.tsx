@@ -4,11 +4,13 @@ import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
 import {useState} from "react";
 import {signIn} from "@/lib/appwrite";
-import * as Sentry from '@sentry/react-native'
+ 
+import useAuthStore from "@/store/auth.store";
 
 const SignIn = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState({ email: '', password: '' });
+    const { setIsAuthenticated, setUser } = useAuthStore();
 
     const submit = async () => {
         const { email, password } = form;
@@ -18,12 +20,16 @@ const SignIn = () => {
         setIsSubmitting(true)
 
         try {
-            await signIn({ email, password });
+            const user = await signIn({ email, password });
+            
+            // Update auth store with the returned user
+            setUser(user as any);
+            setIsAuthenticated(true);
 
             router.replace('/');
         } catch(error: any) {
             Alert.alert('Error', error.message);
-            Sentry.captureEvent(error);
+            
         } finally {
             setIsSubmitting(false);
         }

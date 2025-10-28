@@ -1,21 +1,24 @@
 {
   "expo": {
-    "name": "fast_food",
+    "name": "ZEWE FAST FOOD",
     "slug": "fast_food",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "fastfood",
+    "icon": "./assets/icons/icon.jpeg",
+    "scheme": "zewe",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "package": "com.fastfood.deliveryapp",
-      "versionCode": 1,
+      "package": "com.ZEWE.deliveryapp",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/icon.jpeg",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
@@ -23,7 +26,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/icons/icon.jpeg"
     },
     "plugins": [
       "expo-router",
@@ -34,14 +37,6 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
-        }
-      ],
-      [
-        "@sentry/react-native/expo",
-        {
-          "url": "https://sentry.io/",
-          "project": "jsm_reactnative_food-ordering",
-          "organization": "jsmpro"
         }
       ]
     ],

@@ -1,6 +1,7 @@
-import { Models } from "react-native-appwrite";
+import { ImageSourcePropType } from "react-native";
 
-export interface MenuItem extends Models.Document {
+export interface MenuItem {
+    $id: string;
     name: string;
     am_name?: string;
     price: number;
@@ -12,13 +13,15 @@ export interface MenuItem extends Models.Document {
     type: string;
 }
 
-export interface Category extends Models.Document {
+export interface Category {
+    $id: string;
     name: string;
     am_name?: string;
     description: string;
 }
 
-export interface User extends Models.Document {
+export interface User {
+    $id?: string;
     name: string;
     email: string;
     avatar: string;
@@ -32,7 +35,7 @@ export interface CartCustomization {
 }
 
 export interface CartItemType {
-    id: string; // menu item id
+    id: string;
     name: string;
     price: number;
     image_url: string;
@@ -92,7 +95,7 @@ interface ProfileFieldProps {
     icon: ImageSourcePropType;
 }
 
-interface CreateUserPrams {
+interface CreateUserParams {
     email: string;
     password: string;
     name: string;

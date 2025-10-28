@@ -1,56 +1,47 @@
-import {FlatList, Text, View} from 'react-native'
 import {SafeAreaView} from "react-native-safe-area-context";
-import {getCategories, getMenu} from "@/lib/appwrite";
-import {useLocalSearchParams} from "expo-router";
+import {FlatList, Text, View} from "react-native";
+import {useLocalSearchParams, router} from "expo-router";
 import {useEffect, useState} from "react";
-import CartButton from "@/components/CartButton";
 import cn from "clsx";
+
+import CartButton from "@/components/CartButton";
 import MenuCard from "@/components/MenuCard";
-import {MenuItem, Category} from "@/type";
-
-import Filter from "@/components/Filter";
 import SearchBar from "@/components/SearchBar";
+import {MenuItem} from "@/type";
+import {getMenu} from "@/lib/appwrite";
 
-const Search = () => {
-    const { category, query } = useLocalSearchParams<{query: string; category: string}>()
-    const [menuData, setMenuData] = useState<MenuItem[]>([]);
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState(true);
+const MenuList = () => {
+    const { category } = useLocalSearchParams<{ category?: string }>();
+    const [items, setItems] = useState<MenuItem[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    const loadData = async () => {
+    const load = async () => {
         setLoading(true);
         try {
-            const [menu, cats] = await Promise.all([
-                getMenu({ category, query }),
-                getCategories()
-            ]);
-            setMenuData(menu);
-            setCategories(cats);
-        } catch (error) {
-            console.error('Error loading data:', error);
+            const data = await getMenu({ category: (category as string) || '', query: '' });
+            setItems(data);
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     useEffect(() => {
-        loadData();
-    }, [category, query]);
+        load();
+    }, [category]);
 
     return (
         <SafeAreaView className="bg-white h-full">
             <FlatList
-                data={menuData}
+                data={items}
                 renderItem={({ item, index }) => {
                     const isFirstRightColItem = index % 2 === 0;
-
                     return (
                         <View className={cn("flex-1 max-w-[48%]", !isFirstRightColItem ? 'mt-10': 'mt-0')}>
                             <MenuCard item={item as MenuItem} />
                         </View>
                     )
                 }}
-                keyExtractor={item => item.$id}
+                keyExtractor={(item) => item.$id}
                 numColumns={2}
                 columnWrapperClassName="gap-7"
                 contentContainerClassName="gap-7 px-5 pb-32"
@@ -58,24 +49,22 @@ const Search = () => {
                     <View className="my-5 gap-5">
                         <View className="flex-between flex-row w-full">
                             <View className="flex-start">
-                                <Text className="small-bold uppercase text-primary">Search</Text>
+                                <Text className="small-bold uppercase text-primary">{category ? `${category}` : 'Menu'}</Text>
                                 <View className="flex-start flex-row gap-x-1 mt-0.5">
-                                    <Text className="paragraph-semibold text-dark-100">Find your favorite food</Text>
+                                    <Text className="paragraph-semibold text-dark-100">Choose your favorite</Text>
                                 </View>
                             </View>
-
                             <CartButton />
                         </View>
-
                         <SearchBar />
-
-                        <Filter categories={categories!} />
                     </View>
                 )}
-                ListEmptyComponent={() => !loading && <Text>No results</Text>}
+                ListEmptyComponent={() => !loading && <Text className="px-5">No items</Text>}
             />
         </SafeAreaView>
-    )
+    );
 }
 
-export default Search
+export default MenuList;
+
+
