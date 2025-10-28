@@ -1,17 +1,27 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "ZEWE FAST FOOD",
     "slug": "fast_food",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.jpeg",
     "scheme": "zewe",
+=======
+    "name": "fast_food",
+    "slug": "fast_food",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "fastfood",
+>>>>>>> 865d2fbcf8094de6851405df97b0a80a7d5ca5e0
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
+<<<<<<< HEAD
       "package": "com.ZEWE.deliveryapp",
       "permissions": [
         "ACCESS_FINE_LOCATION",
@@ -27,6 +37,20 @@
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/icons/icon.jpeg"
+=======
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+>>>>>>> 865d2fbcf8094de6851405df97b0a80a7d5ca5e0
     },
     "plugins": [
       "expo-router",
@@ -36,11 +60,19 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
+<<<<<<< HEAD
           "backgroundColor": "#ffffff"
+=======
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+>>>>>>> 865d2fbcf8094de6851405df97b0a80a7d5ca5e0
         }
       ]
     ],
     "experiments": {
+<<<<<<< HEAD
       "typedRoutes": true
     },
     "extra": {
@@ -48,6 +80,10 @@
       "eas": {
         "projectId": "500418aa-39a7-4a45-836b-9d1139a4e17b"
       }
+=======
+      "typedRoutes": true,
+      "reactCompiler": true
+>>>>>>> 865d2fbcf8094de6851405df97b0a80a7d5ca5e0
     }
   }
 }
